@@ -31,24 +31,25 @@ plt.grid()
 plt.tight_layout()
 plt.show()
 
-enrdb = np.arange(0,14,1)
+EbN0dB= np.arange(0, 14, 1)
 N = 500000
 BER = []
-for i in range(len(enrdb)):
-    enr = 10 ** (enrdb[i] / 10)
-    noiseamp = 1/np.sqrt(enr*2)
-    bpsk = 2 * (np.random.rand(N) >= 0.5) - 1
+for i in range(len(EbN0dB)):
+    EbN0 = 10 ** (EbN0dB[i]/ 10)
+    noiseamp = 1 / np.sqrt(2 * EbN0)
+    bpsk_symbols = 2 * (np.random.rand(N) >= 0.5) - 1
     noise = np.random.normal(0, noiseamp, N)
-    bpsk_signal = bpsk + noise 
-    print(bpsk_signal)
-    detected_symbols = 2*( bpsk_signal >= 0)  -1 
-    BER.append(np.sum(bpsk_signal != detected_symbols) / N)
-    print(BER)
+    received_signal = bpsk_symbols + noise
+    print(received_signal)
+    detected_symbols = 2 * (received_signal >= 0) - 1
+    BER.append(np.sum(bpsk_symbols != detected_symbols) / N)
 
-plt.figure(figsize = (10, 8))
-plt.semilogy(enrdb, BER, marker = 'o', label = 'BER')
-plt.xscale('linear')
-plt.yscale('log')
+plt.figure(figsize=(10, 6))
+plt.semilogy(EbN0dB, BER, marker='o', label="BER")
+plt.title("BER vs Eb/No for BPSK Modulation")
+plt.xlabel("Eb/No (dB)")
+plt.ylabel("Bit Error Rate (BER)")
 plt.grid()
 plt.legend()
 plt.show()
+
