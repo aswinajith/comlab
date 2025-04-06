@@ -9,8 +9,10 @@ ak = np.random.randint(2, size=2 * N)
 print(ak)
 
 I_nrz = 2*ak-1
+print(I_nrz)
 I_upsampled = np.repeat(I_nrz, L)
 t = np.arange(start=0, stop=len(I_nrz) * L)
+print(t)
 car= np.cos(2 * np.pi * Fc * t / Fs)
 bpsk = I_upsampled * car
 plt.figure(figsize=(10, 8))
@@ -45,6 +47,7 @@ for i in range(len(EbN0dB)):
     bpsk_symbols = 2 * (np.random.rand(N) >= 0.5) - 1
     noise = np.random.normal(0, noiseamp, N)
     received_signal = bpsk_symbols + noise
+    print(received_signal)
     detected_symbols = 2 * (received_signal >= 0) - 1
     BER.append(np.sum(bpsk_symbols != detected_symbols) / N)
 
