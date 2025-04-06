@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 T = 1
 Fs = 100
 rolloff = 0.7
-
-g = lambda t: np.sinc(t) * np.cos(np.pi * rolloff * t)/(1 - (2 * rolloff * t)**2)
+def g(t):
+    return np.sinc(t) * np.cos(np.pi * rolloff * t)/(1 - (2 * rolloff * t)**2)
 binary_sequence = [0,1,1,0,0,1,1,0,1,0,0,1,1,0,1,0]
 j = np.array(binary_sequence) * 2 -1
 
