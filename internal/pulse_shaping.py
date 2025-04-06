@@ -56,4 +56,5 @@ for i in out2:
 plt.subplot(3,2,5)
 plt.plot(q)
 plt.title("received data")
+plt.tight_layout()
 plt.show()

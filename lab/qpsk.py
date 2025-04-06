@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 N = 10 
-L = 16
-Fc = 50 
+L = 16 
+Fc = 40
 Fs = L * Fc
 ak = np.random.randint(2, size = 2 * N)
 
