@@ -78,4 +78,3 @@ step_size = (x_max - x_min) / L
 noise_power = step_size**2/12
 snreqn = power(x_sampled) / noise_power
 snreqndb = 20 * np.log10(snreqn)
-
