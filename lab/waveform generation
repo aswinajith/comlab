@@ -1,0 +1,21 @@
+#waves
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import square, sawtooth
+
+# ----------- Parameters -----------
+a = 5               # Desired Vpp (peak-to-peak voltage)
+f = 10               # Frequency in Hz
+T = 1 / f           # Time period
+t = np.linspace(0, 2*T, 1000)  # Time vector for 2 periods
+
+# ----------- Waveform Generation -----------
+
+# Square wave: -a/2 to +a/2
+sq_wave = (a / 2) * square(2 * np.pi * f * t)
+
+# Triangular wave: -a/2 to +a/2
+tri_wave = (a / 2) * sawtooth(2 * np.pi * f * t, width=0.5)
+
+# Sawtooth wave: -a/2 to +a/2
+saw_wave = (a / 2) * sawtooth(2 * np.pi * f * t)
