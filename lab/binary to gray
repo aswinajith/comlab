@@ -1,0 +1,13 @@
+def binary_to_gray(binary):
+    gray = binary[0]  # First bit remains the same
+    for i in range(1, len(binary)):
+        gray += str(int(binary[i-1]) ^ int(binary[i]))  # XOR of consecutive bits
+    return gray
+
+decimal_number = 20220919  # Example decimal number
+binary_representation = bin(decimal_number)[2:]  # Convert to binary (remove '0b' prefix)
+gray = binary_to_gray(binary_representation)  # Convert binary to Gray code
+
+print(f"Decimal: {decimal_number}")
+print(f"Binary: {binary_representation}")
+print(f"Gray Code: {gray}")
