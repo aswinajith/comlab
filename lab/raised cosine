@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# Define parameters
+T = 1 # Symbol period
+Fs = 100 # Sampling frequency
+rolloff = 0.7  # Rolloff factor for the raised cosine filter
+# Define the raised cosine pulse shaping function
+g = lambda t: np.sinc(t) * np.cos(np.pi * rolloff * t) / (1 - (2 * rolloff * t) ** 2)
+# Define a binary sequence to be transmitted
+binary_sequence = [0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0]
+
+# Convert binary sequence to bipolar NRZ (-1, +1)
+j = np. array(binary_sequence) * 2 - 1
+print ("NRZ Signal=", j) # Display the bipolar sequence
+# Generate time axis for the modulated signal
+t = np.arange(-2 * T, (len(j) + 2) * T, 1 / Fs)
+# Apply raised cosine pulse shaping to the modulated sequence
+y = sum(j[k] * g(t - k * T) for k in range(len(j)))
+# Create a 2x2 figure for visualizing the results
+fig, ax = plt.subplots(2, 2)
+# Plot the pulse-shaped signal
+ax[0][1].plot(t, y)
+ax[0][1].set_title("Pulse Shaped Signal")
+# Generate the eye diagram
+x = np.arange(-T, T, 1 / Fs)
+for i in range(2 * Fs, len(y) - 3 * Fs, Fs):
+   ax[1][1].plot(x, y[i:i + 2 * Fs], 'red')
+ax[1][1].set_title("Eye Diagram")
+# Plot the original binary message sequence
+ax[0][0].step(np.arange(len(binary_sequence)), binary_sequence)
+ax[0][0].set_title("Binary Message")
+# Plot the impulse response of the raised cosine filter
+t = np.arange(-5, 5, 0.01)
+ax[1][0].plot(t, g(t))
+ax[1][0].set_title("Impulse Response of Raised Cosine Filter")
+# Display all plots
+plt.tight_layout()
+plt.show()
